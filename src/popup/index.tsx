@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '../index.css';
 import App from './App/App';
-import Error from './Error/Error'
+import TabError from './errors/TabError'
 import { tabs } from 'webextension-polyfill'
 
 const root = ReactDOM.createRoot(
@@ -10,8 +10,9 @@ const root = ReactDOM.createRoot(
 );
 
 async function onPopupLoad() {
-  let queryOptions = { active: true, lastFocusedWindow: false };
+  let queryOptions = { active: true, lastFocusedWindow: true };
   var [tab] = await tabs.query(queryOptions)
+  console.log(tab);
   if (tab.url?.startsWith("https://q.utoronto.ca/")) {
     root.render(
       <React.StrictMode>
@@ -21,13 +22,13 @@ async function onPopupLoad() {
   } else {
     root.render(
       <React.StrictMode>
-        <Error />
+        <TabError />
       </React.StrictMode>
     )
   }
 }
 
-onPopupLoad();
+window.onload = () => onPopupLoad();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
