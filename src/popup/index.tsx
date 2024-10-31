@@ -4,19 +4,29 @@ import '../index.css';
 import App from './App/App';
 import TabError from './errors/TabError'
 import { tabs } from 'webextension-polyfill'
+import { Course, QUERCUS_BASE_URL, RawCourse } from '../constants';
+import { Nullable } from '../utils/common';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+const mapResponseToCourses = (obj: RawCourse) : Course | [] => {
+  if (!obj.access_restricted_by_date && obj.name !== null && obj.id !== null) {
+    return {courseName: obj.name, courseId: obj.id}
+  }
+  return [] // means that this entry will be removed in the new array
+}
+
 async function onPopupLoad() {
   let queryOptions = { active: true, lastFocusedWindow: true };
-  var [tab] = await tabs.query(queryOptions)
-  console.log(tab);
-  if (tab.url?.startsWith("https://q.utoronto.ca/")) {
+  const [tab] = await tabs.query(queryOptions)
+  if (tab.url?.startsWith(QUERCUS_BASE_URL)) {
+    let rawCoursesArray: Array<RawCourse> = await (await fetch(`${QUERCUS_BASE_URL}/api/v1/users/self/courses?per_page=100`)).json()
+    let coursesArray = rawCoursesArray.flatMap(mapResponseToCourses)
     root.render(
       <React.StrictMode>
-        <App />
+        <App courses={coursesArray}/>
       </React.StrictMode>
     );
   } else {
