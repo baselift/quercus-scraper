@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '../index.css';
-import App from './App/App';
+import App from './CourseList/CourseList';
 import TabError from './errors/TabError'
 import { tabs } from 'webextension-polyfill'
 import { Course, QUERCUS_BASE_URL, RawCourse } from '../constants';
-import { Nullable } from '../utils/common';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
