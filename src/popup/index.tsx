@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '../index.css';
-import App from './CourseList/CourseList';
+import CourseSelection from './CourseSelection/CourseSelection';
 import TabError from './errors/TabError'
 import { tabs } from 'webextension-polyfill'
 import { Course, QUERCUS_BASE_URL, RawCourse } from '../constants';
@@ -25,7 +25,7 @@ async function onPopupLoad() {
     let coursesArray = rawCoursesArray.flatMap(mapResponseToCourses)
     root.render(
       <React.StrictMode>
-        <App courses={coursesArray}/>
+         <CourseSelection courses={coursesArray}/>
       </React.StrictMode>
     );
   } else {

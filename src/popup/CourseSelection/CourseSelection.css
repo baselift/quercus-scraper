@@ -1,0 +1,14 @@
+.courseList {
+    overflow-y: auto;
+    height: 20rem;
+    width: 20rem;
+}
+
+.courseLabel {
+    margin-left: 0.4rem;
+}
+
+.courseItem {
+    display: flex;
+    margin: 0.5rem 0.5rem;
+}
