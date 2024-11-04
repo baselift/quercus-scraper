@@ -1,15 +1,6 @@
-import { Nullable } from "./utils/common";
+import { Nullable } from "../utils/common";
 
 export const QUERCUS_BASE_URL= "https://q.utoronto.ca";
-
-// Property names
-export const REQUEST = "request";
-export const RESPONSE = "response";
-
-// Request codes to content script
-
-// Response codes from content script
-export const NO_RESULT = -1;
 
 export interface RawCourse {
     account_id: Nullable<string>;

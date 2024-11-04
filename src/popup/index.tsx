@@ -4,7 +4,7 @@ import '../index.css';
 import CourseSelection from './CourseSelection/CourseSelection';
 import TabError from './errors/TabError'
 import { tabs } from 'webextension-polyfill'
-import { Course, QUERCUS_BASE_URL, RawCourse } from '../constants';
+import { Course, QUERCUS_BASE_URL, RawCourse } from './constants';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
