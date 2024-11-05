@@ -1,6 +1,7 @@
 import { ChangeEventHandler, useState } from 'react'
 import './CourseSelection.css'
-import { Course } from '../../constants'
+import { Course } from '../constants'
+
 
 function CourseItem({
   name,
