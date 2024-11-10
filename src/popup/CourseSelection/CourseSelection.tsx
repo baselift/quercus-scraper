@@ -1,7 +1,6 @@
 import { ChangeEventHandler, useState } from 'react'
 import './CourseSelection.css'
-import { Course } from '../constants'
-
+import { Course } from '../../definitions/common'
 
 function CourseItem({
   name,
@@ -48,8 +47,8 @@ function CourseSelection({ courses }: { courses: Array<Course> }) {
 
   return (
     <>
-      <div style={{margin: '0.5rem'}}>
-        <label htmlFor='selectAll'>Select all:</label>
+      <div style={{ margin: '0.5rem' }}>
+        <label htmlFor="selectAll">Select all:</label>
         <input type="checkbox" id="selectAll" onClick={handleSelectAll} />
       </div>
       <section className="courseList">
@@ -62,11 +61,11 @@ function CourseSelection({ courses }: { courses: Array<Course> }) {
           />
         ))}
       </section>
-      <div style={{margin: '0.5rem'}}>
-        <input type='button' id="submitBttn" onClick={handleSubmit} value={"Scrape!"}/>
+      <div style={{ margin: '0.5rem' }}>
+        <input type="button" id="submitBttn" onClick={handleSubmit} value={'Scrape!'} />
       </div>
     </>
   )
 }
 
-export default CourseSelection
+export default CourseSelection;

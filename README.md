@@ -1,5 +1,7 @@
 # Quercus Scraper
 
+If you see this project, please note it is a work-in-progress.
+
 ### Tasks
 
 - [x] Have the extension only work if Quercus is open
