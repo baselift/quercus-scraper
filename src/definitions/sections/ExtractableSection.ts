@@ -1,5 +1,9 @@
-import { Item } from "../common";
+import { Item, Nullable } from "../common";
 
-export abstract class ExtractableSection {
-  abstract getSectionItems(): Promise<Array<Item>>;
+export default abstract class ExtractableSection {
+  /**
+   * Grabs and returns all the items associated with this ExtractableSection. Returns null if there are
+   * no items present or the section does not exist.
+   */
+  abstract getSectionItems(): Promise<Nullable<Array<Item>>>;
 }

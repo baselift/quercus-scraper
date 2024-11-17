@@ -1,4 +1,6 @@
-class QuercusPage extends Dataform {
+import Dataform from "./Dataform";
+
+export default class QuercusPage extends Dataform {
     private body: string;
 
     constructor(pageLink: string, pageName: string, body: string) {

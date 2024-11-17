@@ -4,9 +4,44 @@ import '../index.css'
 import CourseSelection from './CourseSelection/CourseSelection'
 import TabError from './errors/TabError'
 import { tabs } from 'webextension-polyfill'
-import { Course, QUERCUS_BASE_API_ENDPOINT, QUERCUS_BASE_URL, RawCourse } from '../definitions/common'
+import { Course, QUERCUS_BASE_API_ENDPOINT, QUERCUS_BASE_URL, Nullable } from '../definitions/common'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+interface RawCourse {
+  account_id: Nullable<string>;
+  apply_assignment_group_weights: Nullable<boolean>;
+  blueprint: Nullable<boolean>;
+  calendar: Nullable<object>;
+  course_code: Nullable<string>;
+  course_color: Nullable<string>;
+  created_at: Nullable<string>;
+  default_view: Nullable<string>;
+  end_at: Nullable<string>;
+  enrollment_term_id: Nullable<number>;
+  enrollments: Nullable<object>;
+  friendly_name: Nullable<string>;
+  grade_passback_setting: Nullable<string>;
+  grading_standard_id: Nullable<number>
+  hide_final_grades: Nullable<boolean>;
+  homeroom_course: Nullable<boolean>;
+  id: Nullable<number>;
+  is_public: Nullable<boolean>;
+  is_public_to_auth_users: Nullable<boolean>;
+  license: Nullable<string>;
+  name: Nullable<string>;
+  overridden_course_visibility?: string;
+  public_syllabus: Nullable<boolean>;
+  public_syllabus_to_auth: Nullable<boolean>;
+  restrict_enrollments_to_course_dates: Nullable<boolean>;
+  root_account_id: Nullable<number>;
+  start_at: Nullable<string>;
+  storage_quota_mb: Nullable<number>;
+  template: Nullable<boolean>;
+  time_zone: Nullable<string>;
+  uuid: Nullable<string>;
+  workflow_state: Nullable<string>
+  access_restricted_by_date?: boolean;
+}
 
 const mapResponseToCourses = (obj: RawCourse): Course | [] => {
   if (!obj.access_restricted_by_date && obj.name !== null && obj.id !== null) {

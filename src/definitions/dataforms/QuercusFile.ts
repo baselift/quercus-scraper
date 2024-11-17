@@ -1,4 +1,6 @@
-class QuercusFile extends Dataform {
+import Dataform from "./Dataform";
+
+export default class QuercusFile extends Dataform {
     constructor(fileLink: string, fileName: string) {
         super(fileLink, fileName);
     }

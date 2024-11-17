@@ -1,4 +1,4 @@
-abstract class Dataform {
+export default abstract class Dataform {
     protected link: string;
     protected name: string;
 

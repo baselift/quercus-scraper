@@ -1,7 +1,7 @@
-import { Item, QUERCUS_BASE_API_ENDPOINT, QUERCUS_BASE_URL } from "../common";
-import { ExtractableSection } from "./ExtractableSection";
+import { QUERCUS_BASE_API_ENDPOINT } from "../common";
+import ExtractableSection from "./ExtractableSection";
 
-export abstract class APIAccessibleSection extends ExtractableSection {
+export default abstract class APIAccessibleSection extends ExtractableSection {
     private courseId: number;
     private sectionName: string;
 

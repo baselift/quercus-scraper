@@ -1,5 +1,6 @@
 import { Item, Nullable } from "../common";
-import { APIAccessibleSection } from "./APIAccessibleSection";
+import QuercusPage from "../dataforms/QuercusPage";
+import APIAccessibleSection from "./APIAccessibleSection";
 
 interface RawPageData {
     body?: Nullable<string>;
@@ -19,12 +20,35 @@ interface RawPageData {
     url: Nullable<string>;
 }
 
-class Pages extends APIAccessibleSection {
+export class Pages extends APIAccessibleSection {
     constructor(courseId: number) {
         super(courseId, 'pages');
     }
 
-    async getSectionItems(): Promise<Array<Item>> {
-        const response: Array<RawPageData> = await (await fetch(this.assignedAPIEndpoint({"include[]": "body"}))).json();
+    async getSectionItems(): Promise<Nullable<Array<Item>>> {
+        const response = await fetch(this.assignedAPIEndpoint({"include[]": "body"}));
+        if (response.ok === false) {
+            return null;
+        }
+
+        const responseData: Array<RawPageData> = await response.json();
+        const sectionItemArray: Array<Item> = new Array();
+
+        // check if responseData is iterable (avoid possible edge cases)
+        if (responseData?.[Symbol.iterator]) {
+            for (const pageData of responseData) {
+                const body = pageData.body;
+                const page_id = pageData.page_id;
+                const html_url = pageData.html_url;
+                const title = pageData.title;
+
+                if (body != null && page_id != null && html_url != null && title != null) {
+                    sectionItemArray.push({id: page_id, type: new QuercusPage(html_url, title, body)});
+                }
+            }
+            return sectionItemArray;
+        } else {
+            return null;
+        }
     }
 }

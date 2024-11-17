@@ -1,6 +1,7 @@
 import { ChangeEventHandler, useState } from 'react'
 import './CourseSelection.css'
 import { Course } from '../../definitions/common'
+import { Pages } from '../../definitions/sections/Pages'
 
 function CourseItem({
   name,
@@ -35,15 +36,28 @@ function CourseSelection({ courses }: { courses: Array<Course> }) {
     new Array(courses.length).fill(false),
   )
 
-  const handleSelectAll = () =>
-    setCheckedState((checkedState) => checkedState.map((checked) => !checked))
+  const [selectAllState, setSelectAllState] = useState(false);
+
+  const handleSelectAll = () => {
+    let newSelectAllState = !selectAllState;
+    setSelectAllState(newSelectAllState);
+    setCheckedState((checkedState) => checkedState.map(() => newSelectAllState ? true : false));
+  }
 
   const handleSelect = (targetIndex: number) =>
     setCheckedState((checkedState) =>
       checkedState.map((checked, index) => (index === targetIndex ? !checked : checked)),
     )
 
-  const handleSubmit = () => console.log(checkedState)
+  const handleSubmit = async () => {
+    for (let i = 0; i < checkedState.length; i++) {
+      if (checkedState[i]) {
+        let course = courses[i];
+        let page: Pages = new Pages(course.courseId);
+        console.log(await page.getSectionItems());
+      }
+    }
+  }
 
   return (
     <>
