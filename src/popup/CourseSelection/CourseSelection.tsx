@@ -1,7 +1,7 @@
 import { ChangeEventHandler, useState } from 'react'
 import './CourseSelection.css'
 import { Course } from '../../definitions/common'
-import { Pages } from '../../definitions/sections/Pages'
+import Pages from '../../definitions/sections/Pages'
 
 function CourseItem({
   name,
